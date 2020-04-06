@@ -1,0 +1,41 @@
+<html>
+  <body>
+    <h1>Welcome to the Glasswalls Website File Scanner Tool</h1>
+    <p>
+      Please insert a website URL in the following input box and press Submit to Scan the site
+    </p>
+		<p id="demo"></p>
+    <form>
+      <label for="siteUrl">Site URL:</label>
+      <input type="text" id="siteUrl_val" name="siteUrl" /><br /><br />
+			<button type="button" onclick="sendURLtoAF()">Submit</button>
+    </form>
+
+  <script>
+    function sendURLtoAF() {
+
+		let content; 
+
+		var url = 'https://gwwebsitefilescanner.azurewebsites.net/api/WebsiteURLreaderAF?code=aDT7uJGCcfaa27mF96RtWQInBRcekNp1WUr1p8MUmj3ltckeYMyxiA==';   
+  	var enteredSiteValue = document.getElementById('siteUrl_val').value;
+		var params = '{"siteURL":"' + enteredSiteValue + '"}'; 
+
+    (async () => {
+      const rawResponse = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: params
+      });
+
+      const content = await rawResponse.json();
+      document.getElementById("demo").innerHTML = content;
+      console.log(content);
+        })();
+    	}
+  </script>
+
+  </body>
+</html>
